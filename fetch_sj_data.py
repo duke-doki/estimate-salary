@@ -1,7 +1,7 @@
-import pprint
-
 import requests
 from environs import Env
+
+from terminaltables import AsciiTable
 
 
 def predict_rub_salary_for_superJob(vacancy):
@@ -16,6 +16,27 @@ def predict_rub_salary_for_superJob(vacancy):
             return (vacancy['payment_from'] + vacancy['payment_to']) / 2
     else:
         return None
+
+
+def make_table(data):
+    table_data = [
+        [
+            'Язык программирования', 'Вакансий найдено',
+            'Вакансий обработано', 'Средняя зарплата'
+        ]
+    ]
+    for language in data:
+        table_data.append(
+            [
+                language, data[language]['vacancies_found'],
+                data[language]['vacancies_processed'],
+                data[language]['average_salary']
+            ]
+        )
+    # pprint.pprint(average_salary)
+    title = 'SuperJob Moscow'
+    table_instance = AsciiTable(table_data, title)
+    return table_instance.table
 
 
 if __name__ == '__main__':
@@ -64,5 +85,7 @@ if __name__ == '__main__':
             average_salary[f'{language}']['average_salary'] = (
                 int(sum(vacancies_processed) / len(vacancies_processed))
             )
+        else:
+            average_salary[f'{language}']['average_salary'] = 0
 
-    pprint.pprint(average_salary)
+    print(make_table(average_salary))

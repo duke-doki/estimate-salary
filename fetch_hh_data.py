@@ -1,7 +1,7 @@
-import pprint
 from time import sleep
 
 import requests
+from terminaltables import AsciiTable
 
 
 def predict_rub_salary(vacancy):
@@ -14,6 +14,27 @@ def predict_rub_salary(vacancy):
             return (vacancy['salary']['from'] + vacancy['salary']['to']) / 2
     else:
         return None
+
+
+def make_table(data):
+    table_data = [
+        [
+            'Язык программирования', 'Вакансий найдено',
+            'Вакансий обработано', 'Средняя зарплата'
+        ]
+    ]
+    for language in data:
+        table_data.append(
+            [
+                language, data[language]['vacancies_found'],
+                data[language]['vacancies_processed'],
+                data[language]['average_salary']
+            ]
+        )
+    # pprint.pprint(average_salary)
+    title = 'HeadHunter Moscow'
+    table_instance = AsciiTable(table_data, title)
+    return table_instance.table
 
 
 if __name__ == '__main__':
@@ -59,4 +80,4 @@ if __name__ == '__main__':
         )
         sleep(30)
 
-    pprint.pprint(average_salary)
+    print(make_table(average_salary))
