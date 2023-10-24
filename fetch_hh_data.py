@@ -38,12 +38,10 @@ def predict_rub_salary(vacancy):
 average_salary = {}
 
 for language in languages:
-    print(language)
     page = 0
     pages_number = 1
     all_vacancies = []
     while page < pages_number:
-        print(page)
         params = {'area': '1', 'period': '30', 'text': f'программист {language}', 'page': page}
         response = requests.get(url, params=params)
         response.raise_for_status()
