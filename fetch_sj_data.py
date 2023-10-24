@@ -42,7 +42,7 @@ def make_table(data):
 if __name__ == '__main__':
     env = Env()
     env.read_env()
-    sj_token = env.str('SJ_TOKEN')
+    sj_key = env.str('SJ_KEY')
     url = 'https://api.superjob.ru/2.0/vacancies/'
     languages = [
         'JavaScript', 'Java', 'Python',
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         pages_number = 1
         all_vacancies = []
         while page < pages_number:
-            headers = {'X-Api-App-Id': sj_token}
+            headers = {'X-Api-App-Id': sj_key}
             params = {
                 'town': 4, 'catalogues': 48,
                 'keyword': f'{language}', 'page': page
