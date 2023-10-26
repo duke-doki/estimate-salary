@@ -76,7 +76,7 @@ if __name__ == '__main__':
             if vacancy_salary:
                 vacancies_processed.append(vacancy_salary)
 
-        if len(vacancies_processed):
+        if vacancies_processed:
             average_salary = {
                 f'{language}': {'vacancies_found': vacancies['total'],
                                 'vacancies_processed': len(vacancies_processed),
