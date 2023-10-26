@@ -4,7 +4,8 @@ import requests
 
 from fetch_data_helper import make_table, predict_rub_salary_for_headhunter
 
-if __name__ == '__main__':
+
+def fetch_hh_data():
     title = 'HeadHunter Moscow'
     url = 'https://api.hh.ru/vacancies'
     languages = [
@@ -51,3 +52,7 @@ if __name__ == '__main__':
             all_languages.update(average_salary)
         sleep(sec_timeout)
     print(make_table(all_languages, title))
+
+
+if __name__ == '__main__':
+    fetch_hh_data()

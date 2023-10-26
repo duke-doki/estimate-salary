@@ -3,7 +3,8 @@ from environs import Env
 
 from fetch_data_helper import make_table, predict_rub_salary_for_superJob
 
-if __name__ == '__main__':
+
+def fetch_sj_data():
     title = 'SuperJob Moscow'
     env = Env()
     env.read_env()
@@ -13,7 +14,7 @@ if __name__ == '__main__':
         'JavaScript', 'Java', 'Python',
         'Ruby', 'PHP', 'C++',
         'C#', 'C', 'Go'
-        ]
+    ]
     town_id = 4
     category = 48
     vacancies_on_page = 20
@@ -52,3 +53,7 @@ if __name__ == '__main__':
             }
             all_languages.update(average_salary)
     print(make_table(all_languages, title))
+
+
+if __name__ == '__main__':
+    fetch_sj_data()
