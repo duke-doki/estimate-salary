@@ -30,7 +30,6 @@ def make_table(languages):
                 languages[language]['average_salary']
             ]
         )
-    # pprint.pprint(average_salary)
     title = 'HeadHunter Moscow'
     table_instance = AsciiTable(vacancies_table, title)
     return table_instance.table
