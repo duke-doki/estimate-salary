@@ -1,43 +1,10 @@
 import requests
 from environs import Env
 
-from terminaltables import AsciiTable
-
-
-def predict_rub_salary_for_superJob(vacancy):
-    if not vacancy['currency'] == 'rub':
-        return None
-    if not vacancy['payment_from'] and not vacancy['payment_to']:
-        return None
-    elif not vacancy['payment_from']:
-        return vacancy['payment_to'] * 0.8
-    elif not vacancy['payment_to']:
-        return vacancy['payment_from'] * 1.2
-    else:
-        return (vacancy['payment_from'] + vacancy['payment_to']) / 2
-
-
-def make_table(languages):
-    vacancies_table = [
-        [
-            'Язык программирования', 'Вакансий найдено',
-            'Вакансий обработано', 'Средняя зарплата'
-        ]
-    ]
-    for language in languages:
-        vacancies_table.append(
-            [
-                language, languages[language]['vacancies_found'],
-                languages[language]['vacancies_processed'],
-                languages[language]['average_salary']
-            ]
-        )
-    title = 'SuperJob Moscow'
-    table_instance = AsciiTable(vacancies_table, title)
-    return table_instance.table
-
+from fetch_data_helper import make_table, predict_rub_salary_for_superJob
 
 if __name__ == '__main__':
+    title = 'SuperJob Moscow'
     env = Env()
     env.read_env()
     sj_key = env.str('SJ_KEY')
@@ -84,4 +51,4 @@ if __name__ == '__main__':
                                 }
             }
             all_languages.update(average_salary)
-    print(make_table(all_languages))
+    print(make_table(all_languages, title))

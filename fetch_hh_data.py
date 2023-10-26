@@ -1,41 +1,11 @@
 from time import sleep
 
 import requests
-from terminaltables import AsciiTable
 
-
-def predict_rub_salary(vacancy):
-    if not vacancy['salary']['currency'] == 'RUR':
-        return None
-    if not vacancy['salary']['from']:
-        return vacancy['salary']['to'] * 0.8
-    elif not vacancy['salary']['to']:
-        return vacancy['salary']['from'] * 1.2
-    else:
-        return (vacancy['salary']['from'] + vacancy['salary']['to']) / 2
-
-
-def make_table(languages):
-    vacancies_table = [
-        [
-            'Язык программирования', 'Вакансий найдено',
-            'Вакансий обработано', 'Средняя зарплата'
-        ]
-    ]
-    for language in languages:
-        vacancies_table.append(
-            [
-                language, languages[language]['vacancies_found'],
-                languages[language]['vacancies_processed'],
-                languages[language]['average_salary']
-            ]
-        )
-    title = 'HeadHunter Moscow'
-    table_instance = AsciiTable(vacancies_table, title)
-    return table_instance.table
-
+from fetch_data_helper import make_table, predict_rub_salary_for_headhunter
 
 if __name__ == '__main__':
+    title = 'HeadHunter Moscow'
     url = 'https://api.hh.ru/vacancies'
     languages = [
         'JavaScript', 'Java', 'Python',
@@ -66,7 +36,7 @@ if __name__ == '__main__':
         vacancies_processed = []
         for vacancy in all_vacancies:
             if vacancy['salary']:
-                vacancy_salary = predict_rub_salary(vacancy)
+                vacancy_salary = predict_rub_salary_for_headhunter(vacancy)
                 if vacancy_salary:
                     vacancies_processed.append(vacancy_salary)
 
@@ -80,4 +50,4 @@ if __name__ == '__main__':
             }
             all_languages.update(average_salary)
         sleep(sec_timeout)
-    print(make_table(all_languages))
+    print(make_table(all_languages, title))
