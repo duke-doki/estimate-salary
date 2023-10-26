@@ -17,24 +17,24 @@ def predict_rub_salary_for_superJob(vacancy):
         return (vacancy['payment_from'] + vacancy['payment_to']) / 2
 
 
-def make_table(data):
-    table_data = [
+def make_table(languages):
+    vacancies_table = [
         [
             'Язык программирования', 'Вакансий найдено',
             'Вакансий обработано', 'Средняя зарплата'
         ]
     ]
-    for language in data:
-        table_data.append(
+    for language in languages:
+        vacancies_table.append(
             [
-                language, data[language]['vacancies_found'],
-                data[language]['vacancies_processed'],
-                data[language]['average_salary']
+                language, languages[language]['vacancies_found'],
+                languages[language]['vacancies_processed'],
+                languages[language]['average_salary']
             ]
         )
     # pprint.pprint(average_salary)
     title = 'SuperJob Moscow'
-    table_instance = AsciiTable(table_data, title)
+    table_instance = AsciiTable(vacancies_table, title)
     return table_instance.table
 
 
