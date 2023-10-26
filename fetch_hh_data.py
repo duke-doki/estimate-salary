@@ -47,7 +47,7 @@ if __name__ == '__main__':
     town_id = '1'
     amount_of_days = '30'
     sec_timeout = 30
-    average_salary = {}
+    all_languages = {}
     for language in languages:
         page = 0
         pages_number = 1
@@ -60,9 +60,7 @@ if __name__ == '__main__':
             response = requests.get(url, params=params)
             response.raise_for_status()
             vacancies = response.json()
-            average_salary[f'{language}'] = {
-                'vacancies_found': vacancies['found']
-            }
+
             all_vacancies.extend(vacancies['items'])
             pages_number = vacancies['pages']
             page += 1
@@ -74,12 +72,13 @@ if __name__ == '__main__':
                 if vacancy_salary:
                     vacancies_processed.append(vacancy_salary)
 
-        average_salary[f'{language}']['vacancies_processed'] = (
-            len(vacancies_processed)
-        )
-        average_salary[f'{language}']['average_salary'] = (
-            int(sum(vacancies_processed) / len(vacancies_processed))
-        )
+        average_salary = {
+            f'{language}': {'vacancies_found': vacancies['found'],
+                            'vacancies_processed': len(vacancies_processed),
+                            'average_salary': int(sum(vacancies_processed)
+                                                  / len(vacancies_processed))
+                            }
+        }
+        all_languages.update(average_salary)
         sleep(sec_timeout)
-
-    print(make_table(average_salary))
+    print(make_table(all_languages))

@@ -49,10 +49,10 @@ if __name__ == '__main__':
         'Ruby', 'PHP', 'C++',
         'C#', 'C', 'Go'
         ]
-    town_id = '1'
+    town_id = 4
     category = 48
     vacancies_on_page = 20
-    average_salary = {}
+    all_languages = {}
     for language in languages:
         page = 0
         pages_number = 1
@@ -66,9 +66,7 @@ if __name__ == '__main__':
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             vacancies = response.json()
-            average_salary[f'{language}'] = {
-                'vacancies_found': vacancies['total']
-            }
+
             all_vacancies.extend(vacancies['objects'])
             pages_number = round(vacancies['total'] / vacancies_on_page)
             page += 1
@@ -79,15 +77,13 @@ if __name__ == '__main__':
             if vacancy_salary:
                 vacancies_processed.append(vacancy_salary)
 
-        average_salary[f'{language}']['vacancies_processed'] = (
-            len(vacancies_processed)
-        )
-
         if len(vacancies_processed):
-            average_salary[f'{language}']['average_salary'] = (
-                int(sum(vacancies_processed) / len(vacancies_processed))
-            )
-        else:
-            average_salary[f'{language}']['average_salary'] = 0
-
-    print(make_table(average_salary))
+            average_salary = {
+                f'{language}': {'vacancies_found': vacancies['total'],
+                                'vacancies_processed': len(vacancies_processed),
+                                'average_salary': int(sum(vacancies_processed)
+                                                      / len(vacancies_processed))
+                                }
+            }
+            all_languages.update(average_salary)
+    print(make_table(all_languages))
