@@ -5,17 +5,16 @@ from terminaltables import AsciiTable
 
 
 def predict_rub_salary_for_superJob(vacancy):
-    if vacancy['currency'] == 'rub':
-        if not vacancy['payment_from'] and not vacancy['payment_to']:
-            return None
-        elif not vacancy['payment_from']:
-            return vacancy['payment_to'] * 0.8
-        elif not vacancy['payment_to']:
-            return vacancy['payment_from'] * 1.2
-        else:
-            return (vacancy['payment_from'] + vacancy['payment_to']) / 2
-    else:
+    if not vacancy['currency'] == 'rub':
         return None
+    if not vacancy['payment_from'] and not vacancy['payment_to']:
+        return None
+    elif not vacancy['payment_from']:
+        return vacancy['payment_to'] * 0.8
+    elif not vacancy['payment_to']:
+        return vacancy['payment_from'] * 1.2
+    else:
+        return (vacancy['payment_from'] + vacancy['payment_to']) / 2
 
 
 def make_table(data):

@@ -5,15 +5,15 @@ from terminaltables import AsciiTable
 
 
 def predict_rub_salary(vacancy):
-    if vacancy['salary']['currency'] == 'RUR':
-        if not vacancy['salary']['from']:
-            return vacancy['salary']['to'] * 0.8
-        elif not vacancy['salary']['to']:
-            return vacancy['salary']['from'] * 1.2
-        else:
-            return (vacancy['salary']['from'] + vacancy['salary']['to']) / 2
-    else:
+    if not vacancy['salary']['currency'] == 'RUR':
         return None
+    if not vacancy['salary']['from']:
+        return vacancy['salary']['to'] * 0.8
+    elif not vacancy['salary']['to']:
+        return vacancy['salary']['from'] * 1.2
+    else:
+        return (vacancy['salary']['from'] + vacancy['salary']['to']) / 2
+
 
 
 def make_table(data):
