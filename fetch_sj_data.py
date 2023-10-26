@@ -49,7 +49,9 @@ if __name__ == '__main__':
         'Ruby', 'PHP', 'C++',
         'C#', 'C', 'Go'
         ]
-
+    town_id = '1'
+    category = 48
+    vacancies_on_page = 20
     average_salary = {}
     for language in languages:
         page = 0
@@ -58,7 +60,7 @@ if __name__ == '__main__':
         while page < pages_number:
             headers = {'X-Api-App-Id': sj_key}
             params = {
-                'town': 4, 'catalogues': 48,
+                'town': town_id, 'catalogues': category,
                 'keyword': f'{language}', 'page': page
             }
             response = requests.get(url, headers=headers, params=params)
@@ -68,7 +70,7 @@ if __name__ == '__main__':
                 'vacancies_found': vacancies['total']
             }
             all_vacancies.extend(vacancies['objects'])
-            pages_number = round(vacancies['total'] / 20)
+            pages_number = round(vacancies['total'] / vacancies_on_page)
             page += 1
 
         vacancies_processed = []

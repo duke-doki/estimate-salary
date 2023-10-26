@@ -44,7 +44,9 @@ if __name__ == '__main__':
         'Ruby', 'PHP', 'C++',
         'C#', 'C', 'Go'
     ]
-
+    town_id = '1'
+    amount_of_days = '30'
+    sec_timeout = 30
     average_salary = {}
     for language in languages:
         page = 0
@@ -52,7 +54,7 @@ if __name__ == '__main__':
         all_vacancies = []
         while page < pages_number:
             params = {
-                'area': '1', 'period': '30',
+                'area': town_id, 'period': amount_of_days,
                 'text': f'программист {language}', 'page': page
             }
             response = requests.get(url, params=params)
@@ -78,6 +80,6 @@ if __name__ == '__main__':
         average_salary[f'{language}']['average_salary'] = (
             int(sum(vacancies_processed) / len(vacancies_processed))
         )
-        sleep(30)
+        sleep(sec_timeout)
 
     print(make_table(average_salary))
