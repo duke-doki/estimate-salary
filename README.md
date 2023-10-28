@@ -22,6 +22,12 @@ To see data from [SuperJob](https://www.superjob.ru/) run:
 python fetch_sj_data.py
 ```
 
+### print_tables.py
+
+To print both tables with data run:
+```
+python print_tables.py
+```
 
 ### How to install
 
