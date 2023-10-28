@@ -4,8 +4,7 @@ from environs import Env
 from fetch_data_helper import make_table, predict_rub_salary_for_superJob
 
 
-def fetch_sj_data():
-    sj_key = env.str('SJ_KEY')
+def fetch_sj_data(key):
     url = 'https://api.superjob.ru/2.0/vacancies/'
     languages = [
         'JavaScript', 'Java', 'Python',
@@ -21,7 +20,7 @@ def fetch_sj_data():
         pages_number = 1
         all_vacancies = []
         while page < pages_number:
-            headers = {'X-Api-App-Id': sj_key}
+            headers = {'X-Api-App-Id': key}
             params = {
                 'town': town_id, 'catalogues': category,
                 'keyword': f'{language}', 'page': page
@@ -59,5 +58,6 @@ def fetch_sj_data():
 if __name__ == '__main__':
     env = Env()
     env.read_env()
+    sj_key = env.str('SJ_KEY')
     title = 'SuperJob Moscow'
-    print(make_table(fetch_sj_data(), title))
+    print(make_table(fetch_sj_data(sj_key), title))
