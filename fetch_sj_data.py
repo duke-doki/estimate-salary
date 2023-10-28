@@ -49,10 +49,15 @@ def fetch_sj_data():
                 'average_salary': int(sum(vacancies_processed)
                                       / len(vacancies_processed))
             }
-    return  all_languages
+        else:
+            all_languages[language] = {
+                'vacancies_found': vacancies['total'],
+                'vacancies_processed': 0,
+                'average_salary': 0
+            }
+    return all_languages
 
 
 if __name__ == '__main__':
     title = 'SuperJob Moscow'
     print(make_table(fetch_sj_data(), title))
-

@@ -47,7 +47,12 @@ def fetch_hh_data():
                 'average_salary': int(sum(vacancies_processed)
                                       / len(vacancies_processed))
             }
-
+        else:
+            all_languages[language] = {
+                'vacancies_found': vacancies['found'],
+                'vacancies_processed': 0,
+                'average_salary': 0
+            }
         sleep(sec_timeout)
     return all_languages
 
@@ -55,4 +60,3 @@ def fetch_hh_data():
 if __name__ == '__main__':
     title = 'HeadHunter Moscow'
     print(make_table(fetch_hh_data(), title))
-    
