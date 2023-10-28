@@ -12,10 +12,11 @@ python fetch_hh_data.py
 
 ### fetch_sj_data.py
 
-The purpose of `sj_key` is to get access for SuperJob API.
-For this you need to put a secret key `SJ_KEY` inside `.env` file, 
-which can be accessed [here](https://api.superjob.ru/info/) after creating your app and generating a secret key. 
-For more information see [here](https://api.superjob.ru/).
+
+For this script to work you need to access a secret key after registering your own app 
+[here](https://api.superjob.ru/info/). You need to create `.env` file in the same folder with 
+`fetch_sj_data.py` and store there `SJ_KEY` which must be equal to your key.
+
 
 To see data from [SuperJob](https://www.superjob.ru/) run:
 ```
