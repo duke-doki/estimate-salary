@@ -37,7 +37,7 @@ def fetch_hh_data():
         vacancies_processed = []
         for vacancy in all_vacancies:
             if vacancy['salary']:
-                vacancy_salary = predict_rub_salary_for_headhunter(vacancy)
+                vacancy_salary = predict_rub_salary_for_headhunter(vacancy['salary'])
                 if vacancy_salary:
                     vacancies_processed.append(vacancy_salary)
 
