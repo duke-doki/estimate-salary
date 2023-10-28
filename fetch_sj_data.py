@@ -5,8 +5,6 @@ from fetch_data_helper import make_table, predict_rub_salary_for_superJob
 
 
 def fetch_sj_data():
-    env = Env()
-    env.read_env()
     sj_key = env.str('SJ_KEY')
     url = 'https://api.superjob.ru/2.0/vacancies/'
     languages = [
@@ -59,5 +57,7 @@ def fetch_sj_data():
 
 
 if __name__ == '__main__':
+    env = Env()
+    env.read_env()
     title = 'SuperJob Moscow'
     print(make_table(fetch_sj_data(), title))
