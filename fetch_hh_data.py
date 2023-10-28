@@ -42,14 +42,13 @@ def fetch_hh_data():
                     vacancies_processed.append(vacancy_salary)
 
         if vacancies_processed:
-            average_salary = {
-                language: {'vacancies_found': vacancies['found'],
-                           'vacancies_processed': len(vacancies_processed),
-                           'average_salary': int(sum(vacancies_processed)
-                                                 / len(vacancies_processed))
-                           }
+            all_languages[language] = {
+                'vacancies_found': vacancies['found'],
+                'vacancies_processed': len(vacancies_processed),
+                'average_salary': int(sum(vacancies_processed)
+                                      / len(vacancies_processed))
             }
-            all_languages.update(average_salary)
+
         sleep(sec_timeout)
     print(make_table(all_languages, title))
 

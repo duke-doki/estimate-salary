@@ -44,14 +44,13 @@ def fetch_sj_data():
                 vacancies_processed.append(vacancy_salary)
 
         if vacancies_processed:
-            average_salary = {
-                language: {'vacancies_found': vacancies['total'],
-                           'vacancies_processed': len(vacancies_processed),
-                           'average_salary': int(sum(vacancies_processed)
-                                                 / len(vacancies_processed))
-                           }
+            all_languages[language] = {
+                'vacancies_found': vacancies['total'],
+                'vacancies_processed': len(vacancies_processed),
+                'average_salary': int(sum(vacancies_processed)
+                                      / len(vacancies_processed))
             }
-            all_languages.update(average_salary)
+
     print(make_table(all_languages, title))
 
 
