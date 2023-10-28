@@ -13,7 +13,7 @@ python fetch_hh_data.py
 ### fetch_sj_data.py
 
 
-For this script to work you need to access a secret key after registering your own app 
+For this script to work properly with the API you need to access a secret key after registering your own app 
 [here](https://api.superjob.ru/info/). You need to create `.env` file in the same folder with 
 `fetch_sj_data.py` and store there `SJ_KEY` which must be equal to your key.
 
