@@ -5,7 +5,6 @@ from fetch_data_helper import make_table, predict_rub_salary_for_superJob
 
 
 def fetch_sj_data():
-    title = 'SuperJob Moscow'
     env = Env()
     env.read_env()
     sj_key = env.str('SJ_KEY')
@@ -50,9 +49,10 @@ def fetch_sj_data():
                 'average_salary': int(sum(vacancies_processed)
                                       / len(vacancies_processed))
             }
-
-    print(make_table(all_languages, title))
+    return  all_languages
 
 
 if __name__ == '__main__':
-    fetch_sj_data()
+    title = 'SuperJob Moscow'
+    print(make_table(fetch_sj_data(), title))
+

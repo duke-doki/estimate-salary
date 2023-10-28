@@ -6,7 +6,6 @@ from fetch_data_helper import make_table, predict_rub_salary_for_headhunter
 
 
 def fetch_hh_data():
-    title = 'HeadHunter Moscow'
     url = 'https://api.hh.ru/vacancies'
     languages = [
         'JavaScript', 'Java', 'Python',
@@ -50,8 +49,10 @@ def fetch_hh_data():
             }
 
         sleep(sec_timeout)
-    print(make_table(all_languages, title))
+    return all_languages
 
 
 if __name__ == '__main__':
-    fetch_hh_data()
+    title = 'HeadHunter Moscow'
+    print(make_table(fetch_hh_data(), title))
+    
