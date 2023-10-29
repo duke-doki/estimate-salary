@@ -3,14 +3,14 @@
 This project helps to find vacancies for most popular programming languages, 
 representing a convenient table.
 
-### fetch_headhunter.py
+### fetch_hh_vacancies.py
 
 To see data from [HeadHunter](https://hh.ru/) run:
 ```
-python fetch_headhunter.py
+python fetch_hh_vacancies.py
 ```
 
-### fetch_superjob.py
+### fetch_sj_vacancies.py
 
 
 For this script to work properly with the API you need to access a secret key after registering your own app 
@@ -20,7 +20,7 @@ For this script to work properly with the API you need to access a secret key af
 
 To see data from [SuperJob](https://www.superjob.ru/) run:
 ```
-python fetch_superjob.py
+python fetch_sj_vacancies.py
 ```
 
 ### print_tables.py
