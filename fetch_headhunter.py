@@ -41,18 +41,18 @@ def fetch_headhunter():
                     vacancies_processed.append(vacancy_salary)
 
         if vacancies_processed:
-            all_languages[language] = {
-                'vacancies_found': vacancies['found'],
-                'vacancies_processed': len(vacancies_processed),
-                'average_salary': int(sum(vacancies_processed)
-                                      / len(vacancies_processed))
-            }
+            vacancies_amount = len(vacancies_processed),
+            average_salary = int(sum(vacancies_processed)
+                                  / len(vacancies_processed))
         else:
-            all_languages[language] = {
-                'vacancies_found': vacancies['found'],
-                'vacancies_processed': 0,
-                'average_salary': 0
-            }
+            vacancies_amount = 0
+            average_salary = 0
+        all_languages[language] = {
+            'vacancies_found': vacancies['found'],
+            'vacancies_processed': vacancies_amount,
+            'average_salary': average_salary
+        }
+
         sleep(sec_timeout)
     return all_languages
 
